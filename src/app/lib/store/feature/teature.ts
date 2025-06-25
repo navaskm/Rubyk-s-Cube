@@ -1,14 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type Cell = {
+  text: string;
+  color: string;
+};
+
+type Face = {
+  a: Cell;
+  b: Cell;
+  c: Cell;
+  d: Cell;
+  e: Cell;
+  f: Cell;
+  g: Cell;
+  h: Cell;
+  i: Cell;
+};
+
+type CubeState = {
+  left: Face;
+  center: Face;
+  right: Face;
+  back: Face;
+  top: Face;
+  bottom: Face;
+};
+
+type FaceKey = keyof Face;
+
 type RotateSidesArgs = {
-  state: any,
-  one: string,
-  two: string,
-  three: string,
+  state: CubeState,
+  one: FaceKey,
+  two: FaceKey,
+  three: FaceKey,
   rotateBtn: 'left' | 'right' | 'top' | 'bottom'
 }
 
-const initialState = {
+const initialState: CubeState = {
   left: fillFace('w', 'bg-white'),
   center: fillFace('R', 'bg-red-800'),
   right: fillFace('B', 'bg-blue-800'),
